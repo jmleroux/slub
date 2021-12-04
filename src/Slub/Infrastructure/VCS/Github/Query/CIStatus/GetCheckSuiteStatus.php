@@ -15,16 +15,13 @@ use Slub\Infrastructure\VCS\Github\Query\GithubAPIHelper;
  */
 class GetCheckSuiteStatus
 {
-    private GithubAPIClient $githubAPIClient;
-
     /** @var string[] */
     private array $supportedCIChecks;
 
     public function __construct(
-        GithubAPIClient $githubAPIClient,
+        private GithubAPIClient $githubAPIClient,
         string $supportedCIChecks
     ) {
-        $this->githubAPIClient = $githubAPIClient;
         $this->supportedCIChecks = explode(',', $supportedCIChecks);
     }
 

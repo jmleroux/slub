@@ -24,41 +24,20 @@ use Slub\Domain\Query\PRInfo;
  */
 class SlubBot
 {
+    public $botUserId;
     public const UNPUBLISH_CONFIRMATION_MESSAGES = ['Okaay! :ok_hand:', 'Will do! :+1:', 'Oki doki!', 'Yeeee '];
-
-    private PutPRToReviewHandler $putPRToReviewHandler;
-
-    private UnpublishPRHandler $unpublishPRHandler;
-
-    private GetChannelInformationInterface $getChannelInformation;
-
-    private LoggerInterface $logger;
 
     private BotMan $bot;
 
-    private GetBotUserIdInterface $getBotUserId;
-
-    private ChatClient $chatClient;
-
-    private GetPRInfoInterface $getPRInfo;
-
     public function __construct(
-        PutPRToReviewHandler $putPRToReviewHandler,
-        UnpublishPRHandler $unpublishPRHandler,
-        ChatClient $chatClient,
-        GetBotUserIdInterface $getBotUserId,
-        GetChannelInformationInterface $getChannelInformation,
-        GetPRInfoInterface $getPRInfo,
-        LoggerInterface $logger
+        private PutPRToReviewHandler $putPRToReviewHandler,
+        private UnpublishPRHandler $unpublishPRHandler,
+        private ChatClient $chatClient,
+        private GetBotUserIdInterface $getBotUserId,
+        private GetChannelInformationInterface $getChannelInformation,
+        private GetPRInfoInterface $getPRInfo,
+        private LoggerInterface $logger
     ) {
-        $this->putPRToReviewHandler = $putPRToReviewHandler;
-        $this->unpublishPRHandler = $unpublishPRHandler;
-        $this->getChannelInformation = $getChannelInformation;
-        $this->getPRInfo = $getPRInfo;
-        $this->logger = $logger;
-        $this->chatClient = $chatClient;
-        $this->getBotUserId = $getBotUserId;
-
         DriverManager::loadDriver(SlackDriver::class);
         $this->bot = BotManFactory::create(['slack' => ['token' => 'dummyToken']]);
         $this->listensToNewPR($this->bot);

@@ -16,24 +16,8 @@ use Slub\Domain\Repository\PRRepositoryInterface;
  */
 class PublishRemindersHandler
 {
-    private PRRepositoryInterface $PRRepository;
-
-    private LoggerInterface $logger;
-
-    private ChatClient $chatClient;
-
-    private ClockInterface $clock;
-
-    public function __construct(
-        PRRepositoryInterface $PRRepository,
-        ChatClient $chatClient,
-        LoggerInterface $logger,
-        ClockInterface $clock
-    ) {
-        $this->logger = $logger;
-        $this->chatClient = $chatClient;
-        $this->PRRepository = $PRRepository;
-        $this->clock = $clock;
+    public function __construct(private PRRepositoryInterface $PRRepository, private ChatClient $chatClient, private LoggerInterface $logger, private ClockInterface $clock)
+    {
     }
 
     public function handle(): void
@@ -115,10 +99,10 @@ CHAT;
 
     private function formatDuration(PR $PR): string
     {
-        switch ($PR->numberOfDaysInReview()) {
-            case 0: return 'Today';
-            case 1: return 'Yesterday';
-            default: return sprintf('%d days ago', $PR->numberOfDaysInReview());
-        }
+        return match ($PR->numberOfDaysInReview()) {
+            0 => 'Today',
+            1 => 'Yesterday',
+            default => sprintf('%d days ago', $PR->numberOfDaysInReview()),
+        };
     }
 }

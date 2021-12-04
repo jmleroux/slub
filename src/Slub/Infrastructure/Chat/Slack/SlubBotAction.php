@@ -13,11 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class SlubBotAction
 {
-    private SlubBot $slubBot;
-
-    public function __construct(SlubBot $slubBot)
+    public function __construct(private SlubBot $slubBot)
     {
-        $this->slubBot = $slubBot;
     }
 
     public function executeAction(Request $request): Response

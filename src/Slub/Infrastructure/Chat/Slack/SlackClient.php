@@ -16,28 +16,8 @@ use Slub\Infrastructure\Persistence\Sql\Repository\SqlSlackAppInstallationReposi
  */
 class SlackClient implements ChatClient
 {
-    private GetBotUserId $getBotUserId;
-
-    private GetBotReactionsForMessageAndUser $getBotReactionsForMessageAndUser;
-
-    private ClientInterface $client;
-
-    private LoggerInterface $logger;
-
-    private SqlSlackAppInstallationRepository $slackAppInstallationRepository;
-
-    public function __construct(
-        GetBotUserId $getBotUserId,
-        GetBotReactionsForMessageAndUser $getBotReactionsForMessageAndUser,
-        ClientInterface $client,
-        LoggerInterface $logger,
-        SqlSlackAppInstallationRepository $slackAppInstallationRepository
-    ) {
-        $this->getBotUserId = $getBotUserId;
-        $this->getBotReactionsForMessageAndUser = $getBotReactionsForMessageAndUser;
-        $this->client = $client;
-        $this->slackAppInstallationRepository = $slackAppInstallationRepository;
-        $this->logger = $logger;
+    public function __construct(private GetBotUserId $getBotUserId, private GetBotReactionsForMessageAndUser $getBotReactionsForMessageAndUser, private ClientInterface $client, private LoggerInterface $logger, private SqlSlackAppInstallationRepository $slackAppInstallationRepository)
+    {
     }
 
     public function replyInThread(MessageIdentifier $messageIdentifier, string $text): void
