@@ -394,10 +394,13 @@ class PRTest extends TestCase
 
         $pr->close(true);
 
+        $events = $pr->getEvents();
+        $lastEvent = $events[array_key_last($events)];
+
         self::assertNotEmpty($pr->normalize()['CLOSED_AT']);
         self::assertEquals(true, $pr->normalize()['IS_MERGED']);
-        self::assertInstanceOf(PRMerged::class, current($pr->getEvents()));
-        self::assertInstanceOf(PRClosed::class, last($pr->getEvents()));
+        self::assertInstanceOf(PRMerged::class, current($events));
+        self::assertInstanceOf(PRClosed::class, $lastEvent);
     }
 
     /**
@@ -444,8 +447,9 @@ class PRTest extends TestCase
 
         $prWithOneGTMMissing->GTM(ReviewerName::fromString('samir'));
 
-        self::assertCount(2, $prWithOneGTMMissing->getEvents());
-        $event = last($prWithOneGTMMissing->getEvents());
+        $events = $prWithOneGTMMissing->getEvents();
+        self::assertCount(2, $events);
+        $event = $events[array_key_last($events)];
         self::assertInstanceOf(GoodToMerge::class, $event);
     }
 
@@ -478,8 +482,9 @@ class PRTest extends TestCase
 
         $prWithOneGTMMissing->green();
 
-        self::assertCount(2, $prWithOneGTMMissing->getEvents());
-        $event = last($prWithOneGTMMissing->getEvents());
+        $events = $prWithOneGTMMissing->getEvents();
+        self::assertCount(2, $events);
+        $event = $events[array_key_last($events)];
         self::assertInstanceOf(GoodToMerge::class, $event);
     }
 
@@ -753,7 +758,8 @@ class PRTest extends TestCase
         array $events,
         PRIdentifier $expectedPRIdentifier
     ): void {
-        self::assertInstanceOf(PRTooLarge::class, last($events));
+        $lastEvent = $events[array_key_last($events)];
+        self::assertInstanceOf(PRTooLarge::class, $lastEvent);
         self::assertTrue(current($events)->PRIdentifier()->equals($expectedPRIdentifier));
     }
 

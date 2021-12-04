@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Slub\Domain\Repository;
 
-use PRIdentifier;
+use Slub\Domain\Entity\PR\PRIdentifier;
+
 class PRNotFoundException extends \Exception
 {
     public static function create(PRIdentifier $identifier): self

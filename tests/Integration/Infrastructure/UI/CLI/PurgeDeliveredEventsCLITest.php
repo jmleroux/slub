@@ -20,8 +20,7 @@ class PurgeDeliveredEventsCLITest extends KernelTestCase
 
     private ?CommandTester $commandTester = null;
 
-    /** * @var Connection */
-    private $connection;
+    private Connection $connection;
 
     public function setUp(): void
     {

@@ -4,22 +4,23 @@ declare(strict_types=1);
 
 namespace Slub\Domain\Entity\PR;
 
-use ChannelIdentifier;
-use ReviewerName;
-use WorkspaceIdentifier;
-use CIGreen;
-use CIPending;
-use CIRed;
-use GoodToMerge;
-use PRClosed;
-use PRCommented;
-use PRGTMed;
-use PRMerged;
-use PRNotGTMed;
-use PRPutToReview;
-use PRTooLarge;
-use Event;
-use Assert;
+use Slub\Domain\Entity\Channel\ChannelIdentifier;
+use Slub\Domain\Entity\Reviewer\ReviewerName;
+use Slub\Domain\Entity\Workspace\WorkspaceIdentifier;
+use Slub\Domain\Event\CIGreen;
+use Slub\Domain\Event\CIPending;
+use Slub\Domain\Event\CIRed;
+use Slub\Domain\Event\GoodToMerge;
+use Slub\Domain\Event\PRClosed;
+use Slub\Domain\Event\PRCommented;
+use Slub\Domain\Event\PRGTMed;
+use Slub\Domain\Event\PRMerged;
+use Slub\Domain\Event\PRNotGTMed;
+use Slub\Domain\Event\PRPutToReview;
+use Slub\Domain\Event\PRTooLarge;
+use Symfony\Component\EventDispatcher\Event;
+use Webmozart\Assert\Assert;
+
 class PR
 {
     private const IDENTIFIER_KEY = 'IDENTIFIER';

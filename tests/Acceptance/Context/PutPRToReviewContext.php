@@ -168,7 +168,8 @@ class PutPRToReviewContext extends FeatureContext
      */
     public function theSquadShouldBeNotifiedThatThePRHasBeenSuccessfullyInterpreted(): void
     {
-        $this->chatClientSpy->assertReaction(MessageIdentifier::fromString(last($this->currentMessageIds)), NotifySquad::REACTION_CI_PENDING);
+        $lastMessageId = $this->currentMessageIds[array_key_last($this->currentMessageIds)];
+        $this->chatClientSpy->assertReaction(MessageIdentifier::fromString($lastMessageId), NotifySquad::REACTION_CI_PENDING);
     }
 
     /**

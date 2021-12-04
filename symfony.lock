@@ -29,6 +29,9 @@
     "botman/tinker": {
         "version": "1.2.0"
     },
+    "brick/math": {
+        "version": "0.9.3"
+    },
     "clue/stdio-react": {
         "version": "v2.4.0"
     },
@@ -349,6 +352,9 @@
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
+    },
+    "ramsey/collection": {
+        "version": "1.2.2"
     },
     "ramsey/uuid": {
         "version": "3.9.3"

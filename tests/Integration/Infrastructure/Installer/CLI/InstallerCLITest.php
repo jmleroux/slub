@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Integration\Infrastructure\Installer\CLI;
 
+use Doctrine\DBAL\Driver\Connection;
 use Slub\Domain\Entity\Channel\ChannelIdentifier;
 use Slub\Domain\Entity\PR\AuthorIdentifier;
 use Slub\Domain\Entity\PR\MessageIdentifier;
@@ -19,10 +20,10 @@ use Tests\Integration\Infrastructure\KernelTestCase;
 
 class InstallerCLITest extends KernelTestCase
 {
-    private \Doctrine\DBAL\Driver\Connection $connection;
+    private Connection $connection;
 
     /** @var string */
-    private $databaseName;
+    private string $databaseName;
 
     private ?PRIdentifier $currentPRIdentifier = null;
 

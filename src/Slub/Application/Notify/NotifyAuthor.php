@@ -131,7 +131,7 @@ class NotifyAuthor implements EventSubscriberInterface
     private function replyInThread(PRIdentifier $PRIdentifier, string $message): void
     {
         $messageIds = $this->getMessageIdsForPR->fetch($PRIdentifier);
-        $lastMessageId = last($messageIds);
+        $lastMessageId = $messageIds[array_key_last($messageIds)];
         $this->chatClient->replyInThread($lastMessageId, $message);
     }
 }
