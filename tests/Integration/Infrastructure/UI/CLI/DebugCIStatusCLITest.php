@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Integration\Infrastructure\UI\CLI;
 
+use Prophecy\Prophecy\ObjectProphecy;
 use Slub\Domain\Entity\PR\PRIdentifier;
 use Slub\Domain\Query\PRInfo;
 use Slub\Infrastructure\UI\CLI\DebugCIStatusCLI;
@@ -19,13 +20,12 @@ use Tests\Integration\Infrastructure\KernelTestCase;
 class DebugCIStatusCLITest extends KernelTestCase
 {
     private const COMMAND_NAME = 'slub:debug:ci-status';
-    const PR_IDENTIFIER = 'samirboulil/slub/123';
+    public const PR_IDENTIFIER = 'samirboulil/slub/123';
 
-    /** @var CommandTester */
-    private $commandTester;
+    private ?CommandTester $commandTester = null;
 
     /** * @var \Prophecy\Prophecy\ObjectProphecy|GetPRInfo */
-    private $getPRInfo;
+    private ObjectProphecy $getPRInfo;
 
     public function setUp(): void
     {

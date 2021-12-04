@@ -10,8 +10,7 @@ use Slub\Infrastructure\Persistence\InMemory\Query\InMemoryGetChannelInformation
 
 class InMemoryGetChannelInformationTest extends TestCase
 {
-    /** @var GetChannelInformation */
-    private $getChannelInformation;
+    private InMemoryGetChannelInformation $getChannelInformation;
 
     public function setUp(): void
     {

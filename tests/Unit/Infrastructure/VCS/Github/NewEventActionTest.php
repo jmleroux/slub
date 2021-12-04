@@ -25,19 +25,15 @@ class NewEventActionTest extends TestCase
     private const DELIVERY_EVENT_IDENTIFIER = '1234';
 
     /**
-     * @var NewEventAction
      * @sut
      */
-    private $newEventAction;
+    private NewEventAction $newEventAction;
 
-    /** @var ObjectProphecy|EventHandlerRegistry */
-    private $eventHandlerRegistry;
+    private ObjectProphecy $eventHandlerRegistry;
 
-    /** @var ObjectProphecy|SqlDeliveredEventRepository */
-    private $deliveredEventRepository;
+    private ObjectProphecy $deliveredEventRepository;
 
-    /** @var ObjectProphecy|SqlHasEventAlreadyBeenDelivered */
-    private $hasEventAlreadyBeenDelivered;
+    private ObjectProphecy $hasEventAlreadyBeenDelivered;
 
     public function setUp(): void
     {

@@ -21,11 +21,9 @@ use Slub\Infrastructure\Persistence\Sql\Repository\SqlSlackAppInstallationReposi
  */
 class GetChannelInformationTest extends TestCase
 {
-    /** @var MockHandler */
-    private $mock;
+    private ?MockHandler $mock = null;
 
-    /** @var GetChannelInformationInterface */
-    private $getChannelInformation;
+    private GetChannelInformation $getChannelInformation;
 
     private ObjectProphecy $slackAppInstallationRepository;
 

@@ -20,11 +20,9 @@ class FindReviewsTest extends WebTestCase
     private const REPOSITORY_NAME = 'SamirBoulil/slub';
     private const PR_NUMBER = '36';
 
-    /** @var FindReviews */
-    private $findReviews;
+    private FindReviews $findReviews;
 
-    /** @var ObjectProphecy|GithubAPIClient */
-    private $githubAPIClient;
+    private ObjectProphecy $githubAPIClient;
 
     public function setUp(): void
     {

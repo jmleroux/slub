@@ -37,8 +37,7 @@ class SlubBotTest extends KernelTestCase
     /** @var ChatClientSpy */
     private $chatClientSpy;
 
-    /** @var string */
-    private $botUserId;
+    private string $botUserId;
 
     public static function setUpBeforeClass(): void
     {
@@ -124,7 +123,7 @@ class SlubBotTest extends KernelTestCase
         $isPRUnpublished = false;
         try {
             $this->PRRepository->getBy(PRIdentifier::fromString($prIdentifier));
-        } catch (PRNotFoundException $exception) {
+        } catch (PRNotFoundException) {
             $isPRUnpublished = true;
         }
         $this->assertTrue($isPRUnpublished);

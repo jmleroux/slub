@@ -27,17 +27,13 @@ class GetVCSStatusFromGithubTest extends WebTestCase
     private const EXPECTED_CI_STATUS = 'GREEN';
     private const PR_IDENTIFIER = 'SamirBoulil/slub/36';
 
-    /** @var ObjectProphecy|GetCIStatus */
-    protected $getCIStatusStub;
+    protected ObjectProphecy $getCIStatusStub;
 
-    /** @var GetVCSStatusFromGithub */
-    private $getVCSStatus;
+    private GetVCSStatusFromGithub $getVCSStatus;
 
-    /** @var ObjectProphecy|GetPRDetails */
-    private $getPRDetailsStub;
+    private ObjectProphecy $getPRDetailsStub;
 
-    /** @var ObjectProphecy|FindReviews */
-    protected $findReviewsStub;
+    protected ObjectProphecy $findReviewsStub;
 
     public function setUp(): void
     {

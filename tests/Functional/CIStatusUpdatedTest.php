@@ -29,8 +29,7 @@ class CIStatusUpdatedTest extends WebTestCase
     /** @var PRRepositoryInterface */
     private $PRRepository;
 
-    /** @var MockWebServer */
-    private $githubServer;
+    private MockWebServer $githubServer;
 
     public function setUp(): void
     {

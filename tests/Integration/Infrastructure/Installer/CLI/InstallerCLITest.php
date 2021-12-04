@@ -19,14 +19,12 @@ use Tests\Integration\Infrastructure\KernelTestCase;
 
 class InstallerCLITest extends KernelTestCase
 {
-    /** @var Connection */
-    private $connection;
+    private \Doctrine\DBAL\Driver\Connection $connection;
 
     /** @var string */
     private $databaseName;
 
-    /** @var PRIdentifier */
-    private $currentPRIdentifier;
+    private ?PRIdentifier $currentPRIdentifier = null;
 
     public function setUp(): void
     {

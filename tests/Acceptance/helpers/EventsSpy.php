@@ -22,8 +22,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class EventsSpy implements EventSubscriberInterface
 {
-    /** @var array */
-    public $events = [];
+    public array $events = [];
 
     public static function getSubscribedEvents(): array
     {
@@ -114,7 +113,7 @@ class EventsSpy implements EventSubscriberInterface
 
     public function notifyCIPending(CIPending $CIPending): void
     {
-        $this->events[get_class($CIPending)] = true;
+        $this->events[$CIPending::class] = true;
     }
 
     public function CIPendingEventDispatched(): bool
