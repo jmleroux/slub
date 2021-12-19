@@ -111,7 +111,7 @@ class SlackClient implements ChatClient
         );
     }
 
-    public function publishMessageWithBlocksInChannel(ChannelIdentifier $channelIdentifier, array $blocks): string
+    public function publishMessageWithBlocksInChannel(ChannelIdentifier $channelIdentifier, array $blocks, $authorName): string
     {
         $this->logger->critical('CHANNEL IDENTIFIER:' . $channelIdentifier->stringValue());
         $this->logger->critical('workspaceFrom:' . ChannelIdentifierHelper::workspaceFrom($channelIdentifier));
@@ -129,7 +129,9 @@ class SlackClient implements ChatClient
                         'channel' => ChannelIdentifierHelper::channelFrom($channelIdentifier),
                         'blocks' => $blocks,
                         'unfurl_links' => false,
-                        'link_names' => true
+                        'link_names' => true,
+                        'as_user' => true,
+                        'user_id' => $authorName
                     ],
                 ]
             )

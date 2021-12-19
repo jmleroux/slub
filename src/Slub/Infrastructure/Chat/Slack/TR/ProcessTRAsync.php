@@ -90,7 +90,8 @@ class ProcessTRAsync
     private function publishToReviewAnnouncement(
         PRInfo $PRInfo,
         string $channelIdentifier,
-        string $authorIdentifier
+        string $authorIdentifier,
+        string $authorName
     ): string {
         // TODO: Consider putting the url in the PRInfo class instead of recalculating it here
         $PRUrl = GithubAPIHelper::PRUrl(PRIdentifier::fromString($PRInfo->PRIdentifier));
@@ -112,7 +113,8 @@ class ProcessTRAsync
 
         return $this->chatClient->publishMessageWithBlocksInChannel(
             ChannelIdentifier::fromString($channelIdentifier),
-            $message
+            $message,
+            $authorName
         );
     }
 
@@ -124,7 +126,13 @@ class ProcessTRAsync
         $workspaceIdentifier = $this->getWorkspaceIdentifier($request);
         $channelIdentifier = $this->getChannelIdentifier($request);
         $authorIdentifier = $this->getAuthorIdentifier($request);
-        $messageIdentifier = $this->publishToReviewAnnouncement($PRInfo, $channelIdentifier, $authorIdentifier);
+        $authorName = $request->request->get('user_name');
+        $messageIdentifier = $this->publishToReviewAnnouncement(
+            $PRInfo,
+            $channelIdentifier,
+            $authorIdentifier,
+            $authorName
+        );
 
         $PRToReview = new PutPRToReview();
         $PRToReview->PRIdentifier = $PRInfo->PRIdentifier;

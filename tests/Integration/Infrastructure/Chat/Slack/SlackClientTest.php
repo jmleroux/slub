@@ -233,7 +233,11 @@ class SlackClientTest extends KernelTestCase
         ];
         $this->mockGuzzleWith(new Response(200, $apiResponse, json_encode($apiResponse)));
 
-        $actualMessageIdentifier = $this->slackClient->publishMessageWithBlocksInChannel(ChannelIdentifier::fromString($channelIdentifier), $messageWithBlocks);
+        $actualMessageIdentifier = $this->slackClient->publishMessageWithBlocksInChannel(
+            ChannelIdentifier::fromString($channelIdentifier),
+            $messageWithBlocks,
+            'toto'
+        );
 
         self::assertEquals(MessageIdentifierHelper::from($slackWorkspace, $slackChannel, $slackTS), $actualMessageIdentifier);
         $generatedRequest = $this->httpClientMock->getLastRequest();
@@ -261,7 +265,8 @@ class SlackClientTest extends KernelTestCase
 
         $this->slackClient->publishMessageWithBlocksInChannel(
             ChannelIdentifier::fromString('workspace@channel'),
-            ['Ta message containing blocks']
+            ['Ta message containing blocks'],
+            'toto'
         );
     }
 
