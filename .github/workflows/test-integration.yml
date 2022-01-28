@@ -28,7 +28,7 @@ jobs:
                     sudo setfacl -R -m u:1000:rwX -m u:1000:rwX ~/.composer
 
             -   name: Build Docker image
-                run: docker-compose build
+                run: docker-compose build && docker-compose pull
 
             -   name: Install dependencies
                 run: docker-compose run --rm php composer install --no-interaction --prefer-dist
