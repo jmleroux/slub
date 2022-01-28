@@ -27,10 +27,11 @@ jobs:
                     sudo setfacl -dR -m u:1000:rwX -m u:1000:rwX ~/.composer
                     sudo setfacl -R -m u:1000:rwX -m u:1000:rwX ~/.composer
 
-            -   name: setup
+            -   name: Install dependencies
+                run: docker-compose run --rm php composer install --no-interaction --prefer-dist
+
+            -   name: Tests
                 run: |
-                    docker-compose run --rm php composer install --no-interaction --prefer-dist
-                    docker-compose run --rm php bin/console cache:clear --env=test
-                    docker-compose run --rm php vendor/bin/behat -f progress
-                    docker-compose run --rm php vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
                     docker-compose run --rm php vendor/bin/php-cs-fixer fix --diff --dry-run --config=.php_cs.php --using-cache=no
+                    docker-compose run --rm php vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
+                    docker-compose run --rm php vendor/bin/behat -f progress
